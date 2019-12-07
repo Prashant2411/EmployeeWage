@@ -2,6 +2,8 @@
 
 echo "Welcome to Employee Wage Computation Program"
 
+declare -A dailyWageDict
+
 WAGE_PER_HOUR=20
 workingHour=0
 totalHrs=0
@@ -26,22 +28,21 @@ function getDailyWage () {
 	echo $dailyWage
 }
 
-
-
-
 function main () {
 	while (( $day <= 20 && $totalHrs < 100 ))
 	do
 		workingHour=$(getWorkHour)
 		totalHrs=$(( $totalHrs + $workingHour ))
 		dailyWage=$(getDailyWage $workingHour)
-		dailyWageArr[$day]=$dailyWage
 		totalWage=$(( $WAGE_PER_HOUR * $totalHrs ))
-		totalWageArr[$day]=$totalWage
+		dailyWageDict[Day$day]="$dailyWage	$totalWage"
+		#totalWageArr[$day]=$totalWage
 		day=$(( $day + 1 ))
 	done
-	echo ${totalWageArr[@]} 
-	echo ${dailyWageArr[@]}
+for (( i=1;i<$day;i++ ))
+do
+	echo "Day $i		${dailyWageDict[Day$i]}"
+done
 }
 
 main
