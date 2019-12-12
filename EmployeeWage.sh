@@ -2,14 +2,15 @@
 
 echo "Welcome to Employee Wage Computation Program"
 
-declare -A dailyWageDict
-
 WAGE_PER_HOUR=20
-workingHour=0
-totalHrs=0
 FULL_DAY=2
 HALF_DAY=1
+
+workingHour=0
+totalHrs=0
 day=1
+
+declare -A dailyWageDict
 
 function getWorkHour () {
 	isPresent=$(( RANDOM%3 ))
@@ -39,10 +40,10 @@ function main () {
 		#totalWageArr[$day]=$totalWage
 		day=$(( $day + 1 ))
 	done
-for (( i=1;i<$day;i++ ))
-do
-	echo "Day $i		${dailyWageDict[Day$i]}"
-done
+	for (( i=1;i<$day;i++ ))
+	do
+		echo "Day $i		${dailyWageDict[Day$i]}"
+	done
 }
 
 main
